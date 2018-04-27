@@ -30,8 +30,8 @@ function myFunction(employerId) {
 	</nav>
 
 	<div class="container" style="margin-top: 20px">
-	
-		<h2>List of all employers</h2>
+		<h3>Faculty Homepage</h2>
+		<h3>List of all employers</h2>
 		<table class="table table-hover">
 			<thead>
 				<tr>

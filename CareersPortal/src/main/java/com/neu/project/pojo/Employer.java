@@ -86,11 +86,4 @@ public class Employer implements Serializable {
 		this.faculty = faculty;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
 }

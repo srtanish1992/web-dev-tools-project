@@ -17,10 +17,9 @@ public class NoCacheFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain fc)
 			throws IOException, ServletException {
 		HttpServletResponse res = (HttpServletResponse) response;
-		res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate, max-age=0, post-check=0, pre-check=0");
-		res.setHeader("Pragma", "no-cache");
-		res.setDateHeader("Expires", 0);
-		res.setHeader("Last-Modified", new Date().toString());
+		res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+		res.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+		res.setDateHeader("Expires", 0); // Proxies.
 		fc.doFilter(request, response);
 	}
 

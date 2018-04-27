@@ -77,7 +77,7 @@ label {
 
 					<tr>
 						<td style="color: black;">No of Openings:</td>
-						<td><form:input path="openings" pattern="" size="30" /> <font
+						<td><form:input path="openings" pattern="^\d$" size="30" /> <font
 							color="red"><form:errors path="openings" /></font></td>
 					</tr>
 					<tr>
@@ -117,11 +117,7 @@ label {
 			</div>
 		</form:form>
 
-		<p>
-			<a href="${pageContext.request.contextPath}/">Back</a>
-		</p>
-
-	</div>
+</div>
 
 </body>
 </html>

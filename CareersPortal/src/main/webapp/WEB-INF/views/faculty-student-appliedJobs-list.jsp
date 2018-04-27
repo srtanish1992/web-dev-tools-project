@@ -20,20 +20,21 @@ function approve(studentId) {
 	}
 function disapprove(studentId) {
 	location.href = "DisapproveStudents.htm?sId=" + studentId; 
-	<!--alert("Email sent to the student regarding the job application");-->
+		alert("Email sent to the student regarding the job application");
 	}	
 </script>
 </head>
 <body>
-
+	<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 	<c:set var="pendingStudents" value="${sessionScope.pendingStudents}" />
+	<c:set var="approvedStudents" value="${sessionScope.approvedStudents}" />
 	
 	<nav class="navbar navbar-default">
 		<a href="${contextPath}/logout.htm">Logout</a>
 	</nav>
 	
 	<div class="container">
-		<h2>List of Students</h2>
+		<h2>New Applications</h2>
 		<table class="table table-hover">
 			<tbody>
 				<tr>
@@ -55,6 +56,24 @@ function disapprove(studentId) {
 				</c:forEach>
 			</tbody>
 		</table>
+		
+		<h2>Approved Applications</h2>
+		<table class="table table-hover">
+			<tbody>
+				<tr>
+				  <th>First Name :</th>
+				  <th>Last Name :</th>
+				</tr>
+				<c:forEach items="${approvedStudents}" var="student">
+					
+					<tr>
+						<td style="color: black;">${student.user.firstName}</td>
+						<td style="color: black;">${student.user.lastName}</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+		
 	</div>
 </body>
 </html>

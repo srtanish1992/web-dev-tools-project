@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -89,8 +90,11 @@ public class FacultyController {
 		
 		Job job = jobDao.getJob(Long.parseLong(jId));
 		Set<Student> pendingStudents = (Set<Student>)job.getPendingStudents();
+		Set<Student> approvedStudents = (Set<Student>)job.getApprovedStudents();
 		
+		request.getSession().setAttribute("pendingJob", job);
 		request.getSession().setAttribute("pendingStudents", pendingStudents);
+		request.getSession().setAttribute("approvedStudents", approvedStudents);
 		return new ModelAndView("faculty-student-appliedJobs-list");
 	}
 	
@@ -106,7 +110,62 @@ public class FacultyController {
 		Set<Job> approvedJobs = s1.getApprovedJobs();
 		Set<Job> pendingJobs = s1.getPendingJobs();
 		
+		Job pendingSessionJob = (Job) session.getAttribute("pendingJob");
+		Job pendingJob = jobDao.getJob(pendingSessionJob.getJobId());
+		Job addJob = new Job();
+		if(pendingJobs.contains(pendingJob)) {
+			pendingJobs.remove(pendingJob);
+			approvedJobs.add(pendingJob);
+		}
+		s1.setApprovedJobs(approvedJobs);
+		s1.setPendingJobs(pendingJobs);
+		studentDao.updateStudent(s1);
+		request.getSession().setAttribute("pendingStudents", pendingJob.getPendingStudents());
+		request.getSession().setAttribute("approvedStudents", pendingJob.getApprovedStudents());
 		return new ModelAndView("faculty-student-appliedJobs-list");
 	}
+	
+	
+	@RequestMapping(value = "/DisapproveStudents.htm", method = RequestMethod.GET)
+	protected ModelAndView DisapproveStudents(HttpServletRequest request) throws Exception {
+			
+		HttpSession session = (HttpSession) request.getSession();
+		
+		String sId = request.getParameter("sId");
+		
+		Student s1 = studentDao.getStudentByStudentId(Long.parseLong(sId));
+		
+		String emailAddress = s1.getFaculty().getUser().getEmail().getEmailAddress();
+		String senderAddress = emailAddress;
+		String subject = "Regarding your job Application";
+		String message = "You have been disapproved for the job";
+		String recipientAddress = s1.getUser().getEmail().getEmailAddress();
+		// creates a simple e-mail object
+		SimpleMailMessage email = new SimpleMailMessage();
+		email.setFrom(senderAddress);
+		email.setTo(recipientAddress);
+		email.setSubject(subject);
+		email.setText(message);
+		// sends the e-mail
+		mailSender.send(email);
+		
+		Set<Job> approvedJobs = s1.getApprovedJobs();
+		Set<Job> pendingJobs = s1.getPendingJobs();
+		
+		Job pendingSessionJob = (Job) session.getAttribute("pendingJob");
+		Job pendingJob = jobDao.getJob(pendingSessionJob.getJobId());
+		Job addJob = new Job();
+		if(pendingJobs.contains(pendingJob)) {
+			pendingJobs.remove(pendingJob);
+//			approvedJobs.add(pendingJob);
+		}
+//		s1.setApprovedJobs(approvedJobs);
+		s1.setPendingJobs(pendingJobs);
+		studentDao.updateStudent(s1);
+		request.getSession().setAttribute("pendingStudents", pendingJob.getPendingStudents());
+		request.getSession().setAttribute("approvedStudents", pendingJob.getApprovedStudents());
+		return new ModelAndView("faculty-student-appliedJobs-list");
+	}
+	
 
 }

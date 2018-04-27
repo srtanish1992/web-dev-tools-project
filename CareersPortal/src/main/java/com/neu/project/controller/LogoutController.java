@@ -1,5 +1,8 @@
 package com.neu.project.controller;
 
+import java.util.Enumeration;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,6 +17,12 @@ public class LogoutController {
 	protected void logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.getSession().invalidate();
 		request.getSession(false);
+		System.out.println(request.getServletPath());
+		Enumeration<String> names = request.getSession().getAttributeNames();
+		while (names.hasMoreElements()) {
+			String name = names.nextElement();
+			request.getSession().removeAttribute(name);
+		}
 		response.sendRedirect(request.getContextPath() + "/");
 	}
 }

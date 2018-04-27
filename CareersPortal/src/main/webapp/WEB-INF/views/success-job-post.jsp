@@ -1,5 +1,6 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -37,7 +38,11 @@ label {
 <nav class="navbar navbar-default">
 		<a href="${contextPath}/logout.htm">Logout</a>
 	</nav>
-
-<h1>Job posted successfully</h1>
+<!-- <h1>Job posted successfully</h1>-->
+<form:form action="${contextPath}/employerJobs.htm" method="post">
+		<h1>Job posted successfully</h1>
+		<input type="submit" class="btn btn-lg"
+							value="Go back to Jobs List" />
+	</form:form>
 </body>
 </html>

@@ -110,6 +110,19 @@ public class EmployerController {
 		jobDao.updateJob(job);
 		
 		return new ModelAndView("success-job-post");
+	} 
+	
+	@RequestMapping(value = "/employerJobs.htm", method = RequestMethod.POST)
+	protected ModelAndView employerJobs(HttpServletRequest request) throws Exception {
+		
+		HttpSession session = (HttpSession) request.getSession();
+		
+		Employer employer = ((Employer) session.getAttribute("employer"));
+		Employer emp1 = employerDao.getEmployerByEmployerId(employer.getEmployerId());
+		Set<Job> jobs = emp1.getJobs();
+		request.getSession().setAttribute("employer", emp1);
+		request.getSession().setAttribute("jobs", jobs);
+		return new ModelAndView("employer-homepage");
 	}
 	
 	@RequestMapping(value = "/studentJobs.htm", method = RequestMethod.GET)

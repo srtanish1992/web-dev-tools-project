@@ -23,10 +23,18 @@ function myFunction(jobId) {
 <body>
 	<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 	<c:set var="user" value="${sessionScope.user}" />
+	<c:set var="employer" value="${sessionScope.employer}" />
 	<c:set var="jobs" value="${sessionScope.jobs}" />
 	<nav class="navbar navbar-default">
 		<a href="${contextPath}/logout.htm">Logout</a>
 	</nav>
+	<h2>Employer Homepage</h2>
+	<div class="form-group">
+		<label for="pic" style="color: linen;"></label> <img
+			name="pic" id="pic" height="50" width="50"
+			src="${user.filename}" />
+	</div>
+	
 	<div class="container">
 		<a href="${contextPath}/postJob.htm"><span
 			style="text-decoration: underline;">POST A NEW JOB</span>

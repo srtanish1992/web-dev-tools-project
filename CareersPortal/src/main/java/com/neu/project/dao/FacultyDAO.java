@@ -1,5 +1,7 @@
 package com.neu.project.dao;
 
+import java.util.List;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 
@@ -44,16 +46,31 @@ public class FacultyDAO extends DAO {
 
 	}
 
-	public Faculty getfaculty() throws UserException {
+	public List<Faculty> getfaculty() throws UserException {
 		try {
 			begin();
 			Query q = getSession().createQuery("from Faculty");
-			Faculty faculty = (Faculty) q.uniqueResult();
+//			Faculty faculty = (Faculty) q.setMaxResults(1).uniqueResult();
+			List<Faculty> faculty = (List<Faculty>) q.list();
 			commit();
 			return faculty;
 		} catch (HibernateException e) {
 			rollback();
 			throw new UserException("Could not get employer " + e.getMessage());
+		}
+	}
+
+	public Faculty getfacultyByEmployerId(Long em) throws UserException {
+		try {
+			begin();
+			Query q = getSession().createQuery("from Faculty where facultyId = :facultyId");
+			q.setLong("facultyId", em);
+			Faculty faculty = (Faculty) q.uniqueResult();
+			commit();
+			return faculty;
+		} catch (HibernateException e) {
+			rollback();
+			throw new UserException("Could not get employer ", e);
 		}
 	}
 	

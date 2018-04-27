@@ -34,6 +34,8 @@ function cancelApplication(jobId) {
 	<nav class="navbar navbar-default">
 		<a href="${contextPath}/logout.htm">Logout</a>
 	</nav>
+	
+	<h2>Student Homepage</h2>
 
 	<div class="container" style="margin-top: 20px">
 

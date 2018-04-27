@@ -30,24 +30,6 @@ public class StudentDAO extends DAO {
 		}
 	}
 
-	public List<Student> getUnassignedVolunteers() throws UserException {
-
-		try {
-			begin();
-			String hql = "FROM Student where isAssignedToAProject = :isAssignedToAProject and isLegalAge = :isLegalAge and isAvailable = :isAvailable";
-			Query query = getSession().createQuery(hql);
-			query.setString("isAssignedToAProject", "No");
-			query.setString("isLegalAge", "Yes");
-			query.setString("isAvailable", "Yes");
-			List<Student> volunteers = (List<Student>) query.list();
-			commit();
-			return volunteers;
-		} catch (HibernateException e) {
-			rollback();
-			throw new UserException("Could not get projects", e);
-		}
-	}
-
 	public Student getStudentByStudentId(Long sId) throws UserException {
 		try {
 			begin();

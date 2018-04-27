@@ -53,42 +53,42 @@ label {
 					</tr>
 					<tr>
 						<td style="color: black;">First Name:</td>
-						<td><form:input path="user.firstName" pattern=""
+						<td><form:input path="user.firstName" pattern="" id="firstName" name="firstName"	
 								size="30" /> <font color="red"><form:errors
-									path="user.firstName" htmlEscape="true"/></font></td>
+									path="user.firstName"/></font></td>
 					</tr>
 					<tr>
 						<td style="color: black;">Last Name:</td>
-						<td><form:input path="user.lastName" pattern="^[a-zA-Z ]{2,30}$"
+						<td><form:input path="user.lastName" pattern="^[a-zA-Z ]{2,30}$" name="lastName"
 								size="30" /> <font color="red"><form:errors
 									path="user.lastName" /></font></td>
 					</tr>
 					<tr>
 						<td style="color: black;">Middle Name:</td>
-						<td><form:input path="user.middleName" pattern="^[a-zA-Z ]{2,30}$"
+						<td><form:input path="user.middleName" pattern="^[a-zA-Z ]{2,30}$" name="lastName"
 								size="30" /> <font color="red"><form:errors
 									path="user.middleName" /></font></td>
 					</tr>
 					<tr>
 						<td style="color: black;">User Name:</td>
-						<td><form:input path="user.userName" pattern="^[A-z0-9À-ž\s]{2,}$"
+						<td><form:input path="user.userName" pattern="^[A-z0-9À-ž\s]{2,}$" name="userName"
 								size="30" /> <font color="red"><form:errors
 									path="user.userName" /></font></td>
 					</tr>
 					<tr>
 						<td style="color: black;">Password:</td>
-						<td><form:password path="user.password" size="30" pattern=".{6,}" />
+						<td><form:password path="user.password" size="30" pattern=".{6,}" name="password" />
 							<font color="red"><form:errors path="user.password" /></font></td>
 					</tr>
 					<tr>
 						<td style="color: black;">Email Id:</td>
 						<td><form:input path="user.email.emailAddress" size="30"
-								pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" type="email" />
+								pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" type="email" name="emailAddress" />
 							<font color="red"><form:errors path="user.email.emailAddress" /></font></td>
 					</tr>
 					<tr>
 						<td style="color: black;">Organization Name:</td>
-						<td><form:input path="organizationName" pattern="^[a-zA-Z ]{2,30}$"
+						<td><form:input path="organizationName" pattern="^[a-zA-Z ]{2,30}$" name="organizationName"
 								size="30" /> <font color="red"><form:errors
 									path="organizationName" /></font></td>
 					</tr>
@@ -106,13 +106,13 @@ label {
 					<tr>
 						<td style="color: black;">Address:</td>
 						<td><form:textarea path="user.address" size="150"
-								pattern="^[A-z0-9À-ž\s]{2,150}$" /> <font color="red"><form:errors
+								pattern="^[A-z0-9À-ž\s]{2,150}$" name="address" /> <font color="red"><form:errors
 									path="user.address" /></font></td>
 					</tr>
 					<tr>
 						<td style="color: black;">City</td>
 						<td><form:input path="user.city" size="30"
-								pattern="^[A-z0-9À-ž\s]{2,150}$" /> <font color="red"><form:errors
+								pattern="^[A-z0-9À-ž\s]{2,150}$" name="city" /> <font color="red"><form:errors
 									path="user.city" /></font></td>
 					</tr>
 					<tr>
@@ -129,7 +129,7 @@ label {
 					<tr>
 						<td style="color: black;">Phone Number:</td>
 						<td><form:input path="user.phoneNumber" size="30"
-								pattern="^\d{10}$" /> <font color="red"><form:errors
+								pattern="^\d{10}$"  name="phoneNumber" /> <font color="red"><form:errors
 									path="user.phoneNumber" /></font></td>
 					</tr>
 					<tr>
@@ -140,9 +140,7 @@ label {
 			</div>
 		</form:form>
 		
-		<p>
-			<a href="${pageContext.request.contextPath}/">Back to Login Page</a>
-		</p>
+		
 		
 	</div>
 </body>

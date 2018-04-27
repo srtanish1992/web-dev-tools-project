@@ -43,12 +43,8 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>NoCacheFilter</filter-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>/project/*</url-pattern>
 	</filter-mapping>
 	
-	<context-param>
-		<param-name>defaultHtmlEscape</param-name>
-		<param-value>true</param-value>
-	</context-param>
 	
 </web-app>
