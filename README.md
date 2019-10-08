@@ -1,2 +1,2 @@
 # web-dev-tools-project
-NUCareers
+Northeastern University Careers portal
